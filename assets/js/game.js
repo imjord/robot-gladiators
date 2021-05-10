@@ -125,6 +125,17 @@ var startGame = function() {
 
             // pass the picked enemyname variables value into the fight function where it will assume the value of the enemyname parameter
             fight(pickedEnemyName);
+
+            if (playerHealth > 0 && i < enemyNames.length -1) {
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round?")
+
+                if (storeConfirm) {
+                    shop();
+                }
+
+
+
+            }
         }
         else {
             window.alert(" you have lost your robot in battle! GAME OVER");
@@ -161,7 +172,47 @@ var endGame = function() {
 
 };
 
+var shop = function() {
+   
+    //ASK PLAYER WHAT THEY WOULD LIKE
+    var shopOptionPrompt = window.prompt(
+        "Would you like to REFILL your health UPGRADE Your attack or LEAVE the shop? please enter one UPGRADE REFILL OR LEAVE"
+    );
+        switch (shopOptionPrompt) {
+            case "REFILL": 
+            case "refill":
+                if (playerMoney >= 7) {
+            window.alert("Refilling players health by 20 for 7 dollars");
 
+            playerHealth = playerHealth + 20;
+            playerMoney = playerMoney - 7; 
+        } else {
+            window.alert("You dont have enough money!");
+        }
+            break;
+            case "UPGRADE": 
+            case "upgrade":
+                if (playerMoney >= 7) {
+                window.alert("Upgrading players attack by 6 for 7 dollars");
+                playerAttack = playerAttack + 7;
+                playerMoney = playerMoney - 7;
+            } else {
+                window.alert("You dont have enough money!"); 
+            }
+            break;
+            case "LEAVE": 
+            case"leave":
+            window.alert("Leaving the store");
+            break;
+
+            //do nothing function will end
+            
+            default:
+                window.alert("You did not pick a valid option. Try again");
+                shop();
+                break;
+         }
+}
 
 
 startGame();
